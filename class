@@ -1,0 +1,296 @@
+from enum import Enum
+
+class PersonGender(Enum):
+    Female = 1
+    Male = 2
+
+class VehicleMake(Enum):
+    Nissan = 1
+    Mercedes = 2
+    Kia = 3
+
+class VehicleModel(Enum):
+    Altima = 1
+    Sedan = 2
+    SUV = 3
+
+class Person:
+    # Doc_String
+    """Class to represent a Customer"""
+
+    # Constructor
+    def __init__(self, per_fname, per_lname, per_age, per_gender, per_phonenum):
+        self.per_fname = per_fname
+        self.per_lname = per_lname
+        self.per_age = per_age
+        self.per_gender = per_gender
+        self.per_phonenum = per_phonenum
+
+    def set_per_fname(self, per_fname):
+        self.per_fname = per_fname
+    def get_per_fname(self):
+        return self.per_fname
+
+    def set_per_lname(self, per_lname):
+        self.per_lname = per_lname
+    def get_per_lname(self):
+        return self.per_lname
+
+    def set_per_age(self, per_age):
+        self.per_age = per_age
+    def get_per_age(self):
+        return self.per_age
+
+    def set_per_gender(self, per_gender):
+        self.per_gender = per_gender
+    def get_per_gender(self):
+        return self.per_gender
+
+    def set_per_phonenum(self, per_phonenum):
+        self.per_phonenum = per_phonenum
+    def get_per_phonenum(self):
+        return self.per_phonenum
+
+    def displayInfo(self):
+        print(
+            "Name: " + self.per_fname+" "+self.per_lname+"\nAge: "+str(self.per_age)+"\nGender: "+str(self.per_gender)+"\nCell Phone Number: " +str(self.per_phonenum))
+
+class Customer(Person):
+    # Doc_String
+    """Class to represent a Customer"""
+
+    # Constructor
+    def __init__(self, per_fname, per_lname, per_age, per_gender, per_phonenum, cus_email, cus_home_address, cus_car_num, cus_car_license_num, cus_ID):
+        Person.__init__(self, per_fname, per_lname, per_age, per_gender, per_phonenum)
+        self.cus_email = cus_email
+        self.cus_home_address = cus_home_address
+        self.cus_car_num = cus_car_num
+        self.cus_car_license_num = cus_car_license_num
+        self.cus_ID = cus_ID
+
+    # Setter & Getter
+    def set_cus_email(self, cus_email):
+        self.cus_email = cus_email
+    def get_cus_email(self):
+        return self.cus_email
+
+    def set_cus_home_address(self, cus_home_address):
+        self.cus_home_address = cus_home_address
+    def get_cus_home_address(self):
+        return self.cus_home_address
+
+    def set_cus_car_num(self, cus_car_num):
+        self.cus_car_num = cus_car_num
+    def get_cus_car_num(self):
+        return self.cus_car_num
+
+    def set_cus_car_license_num(self, cus_car_license_num):
+        self.cus_car_license_num = cus_car_license_num
+    def get_cus_car_license_num(self):
+        return self.cus_car_license_num
+
+    def set_cus_ID(self, cus_ID):
+        self.cus_ID = cus_ID
+    def get_cus_ID(self):
+        return self.cus_ID
+
+    # Display the information
+    def displayInfo(self):
+        Person.displayInfo(self)
+        print("Email: "+str(self.cus_email)+"\nHome Address: "+str(self.cus_home_address)+"\nCar Registration Number: "+str(self.cus_car_num)+"\nCar License Number: "+str(self.cus_car_license_num)+"\nID: "+str(self.cus_ID)+"\n\n"+"*"*33+"\n")
+# Creating objects
+customer = Customer("James W.", "Jones", 32, PersonGender.Male.name, "816-897-9862", "James.Jones@hotmail.com","USA-California", "AD-89034", 5000324, 78419914856293)
+customer.displayInfo()
+
+class Mechanic(Person):
+    # Doc_String
+    """Class to represent a Customer"""
+
+    # Constructor
+    def __init__(self, per_fname, per_lname, per_age, per_gender, per_phonenum, mech_ID, mech_garage_address, mech_email, mech_job, mech_experience_level):
+        Person.__init__(self, per_fname, per_lname, per_age, per_gender, per_phonenum)
+        self.mech_ID = mech_ID
+        self.mech_garage_address = mech_garage_address
+        self.mech_email = mech_email
+        self.mech_job = mech_job
+        self.mech_experience_level = mech_experience_level
+
+    # Setter & Getter
+    def set_mech_ID(self, mech_ID):
+        self.mech_ID = mech_ID
+    def get_mech_ID(self):
+        return self.mech_ID
+
+    def set_mech_garage_address(self, mech_garage_address):
+        self.mech_garage_address = mech_garage_address
+    def get_mech_garage_address(self):
+        return self.mech_garage_address
+
+    def set_mech_email(self, mech_email):
+        self.mech_email = mech_email
+    def get_mech_email(self):
+        return self.mech_email
+
+    def set_mech_job(self, mech_job):
+        self.mech_job = mech_job
+    def get_mech_job(self):
+        return self.mech_job
+
+    def set_mech_experience_level(self, mech_experience_level):
+        self.mech_experience_level = mech_experience_level
+    def get_mech_experience_level(self):
+        return self.mech_experience_level
+
+    # Display the information
+    def displayInfo(self):
+        Person.displayInfo(self)
+        print("Mechanic ID: "+str(self.mech_ID)+"\nGarage Address: "+str(self.mech_garage_address)+"\nEmail: "+str(self.mech_email)+"\nJob Type: "+str(self.mech_job)+"\nExperience Level: "+str(self.mech_experience_level)+"\n\n"+"*"*33+"\n")
+
+# Creating objects
+mechanic = Mechanic("Hans", "K (Mechanic)", 44, PersonGender.Male.name, "816-735-2847", "RE-27369", "USA-California", "Hans.K@hotmail.com", "General Automotive Mechanic", "Expert")
+mechanic.displayInfo()
+
+class Vehicle:
+    # Doc_String
+    """Class to represent a vehicle"""
+
+    # Constructor
+    def __init__(self, vehmake, vehmodel, vehyear, vehprice, vehcolor, vehID):
+        self.vehmake = vehmake
+        self.vehmodel = vehmodel
+        self.vehyear = vehyear
+        self.vehprice = vehprice
+        self.vehcolor = vehcolor
+        self.vehID = vehID
+
+    # Setter & Getter
+    def setvehmake(self, vehmake):
+        self.vehmake = vehmake
+    def getvehmake(self):
+        return self.vehmake
+
+    def setvehmodel(self, vehmodel):
+        self.vehmodel = vehmodel
+    def getvehmodel(self):
+        return self.vehmodel
+
+    def setvehyear(self, vehyear):
+        self.vehyear = vehyear
+    def getvehyear(self):
+        return self.vehyear
+
+    def setvehprice(self, vehprice):
+        self.vehprice = vehprice
+    def getvehprice(self):
+        return self.vehprice
+
+    def setvehcolor(self, vehcolor):
+        self.vehcolor = vehcolor
+    def getvehcolor(self):
+        return self.vehcolor
+
+    def setvehID(self, vehID):
+        self.vehID = vehID
+    def getvehID(self):
+        return self.vehID
+
+    # Display the information
+    def displayInfo(self):
+        print("Vehicle Type: "+str(self.vehmake)+" "+str(self.vehmodel)+"\nYear: "+str(self.vehyear)+"\nPrice: "+str(self.vehprice)+"\nVehicle Color: "+str(self.vehcolor)+"\nVehicle ID: "+str(self.vehID))
+
+class Car(Vehicle):
+    # Doc_String
+    """Class to represent a Car"""
+
+    # Constructor
+    def __init__(self, vehmake, vehmodel, vehyear, vehprice, vehcolor, vehID, carnumwheels, carnumdoors, carloadcapacity, carloadweight, carroofwindow):
+        Vehicle.__init__(self, vehmake, vehmodel, vehyear, vehprice, vehcolor, vehID)
+        self.carnumwheels = carnumwheels
+        self.carnumdoors = carnumdoors
+        self.carloadcapacity = carloadcapacity
+        self.carloadweight = carloadweight
+        self.carroofwindow = carroofwindow
+
+    # Setter & Getter
+    def setcarnumwheels(self, carnumwheels):
+        self.carnumwheels = carnumwheels
+    def getcarnumwheels(self):
+        return self.carnumwheels
+
+    def setcarnumdoors(self, carnumdoors):
+        self.carnumdoors = carnumdoors
+    def getcarnumdoors(self):
+        return self.carnumdoors
+
+    def setcarloadcapacity(self, carloadcapacity):
+        self.carloadcapacity = carloadcapacity
+    def getcarloadcapacity(self):
+        return self.carloadcapacity
+
+    def setcarloadweight(self, carloadweight):
+        self.carloadweight = carloadweight
+    def getcarloadweight(self):
+        return self.carloadweight
+
+    def setcarroofwindow(self, carroofwindow):
+        self.carroofwindow = carroofwindow
+    def getcarroofwindow(self):
+        return self.carroofwindow
+
+    # Display the information
+    def displayInfo(self):
+        Vehicle.displayInfo(self)
+        print("Number of Wheels: "+str(self.carnumwheels)+"\nNumber of Doors: "+str(self.carnumdoors)+"\nLoad Capacity: "+str(self.carloadcapacity)+"\nLoad Weight: "+str(self.carloadweight)+"\nIs there a Roof Window: "+str(self.carroofwindow)+"\n\n"+"*"*33+"\n")
+
+
+# Creating objects
+car = Car(VehicleMake.Nissan.name, VehicleModel.Altima.name, 2014, 25000, "Silver", "AD-89034", 4, 4, 1400, 1000, True)
+car.displayInfo()
+
+
+class Receipt:
+    """Class to represent a Receipt"""
+
+    def __init__(self, diagnostics_price, oil_replacement_price, oil_filter_price, tire_replacement_price, tire_price,
+                 taxes, discount):
+        self.diagnostics_price = diagnostics_price
+        self.oil_replacement_price = oil_replacement_price
+        self.oil_filter_price = oil_filter_price
+        self.tire_replacement_price = tire_replacement_price
+        self.tire_price = tire_price
+        self.taxes = taxes
+        self.discount = discount
+
+    print("Receipt\n" + "\nServices                  | Price (AED)" + "\n" + "_" * 40)
+
+    def displayInfo(self):
+        print("\n1. Diagnostics            | " + str(self.diagnostics_price) + "\n2. Oil Replacement        | " + str(
+            self.oil_replacement_price) + "\n3. Oil Filter Parts       | " + str(
+            self.oil_filter_price) + "\n4. Tire Replacement (2)   | " + str(
+            self.tire_replacement_price) + "\n5. Tire (2)               | " + str(
+            self.tire_price) + "\n                    Taxes | " + str(
+            self.taxes) + "\n                 Discount | " + str(self.discount) + "\n" + "_" * 40 + "\n")
+
+
+receipt = Receipt(15, 120, 35, 100, 160, 21.5, 11.5)
+receipt.displayInfo()
+
+
+def calculate_final_amount(diagnostics_price, oil_replacement_price, oil_filter_price, tire_replacement_price,
+                           tire_price, taxes, discount):
+    # Calculate the subtotal by adding up all the prices
+    total = diagnostics_price + oil_replacement_price + oil_filter_price + tire_replacement_price + tire_price
+    print("Total: AED " + str(total))
+    # Apply the discount by subtracting it from the subtotal
+    total_after_discount = total - discount
+    print("Total After Discount: AED " + str(total_after_discount))
+    # Calculate the final amount by adding the taxes to the discounted total
+    final_amount = total_after_discount + taxes
+
+    # Return the final amount
+    return final_amount
+
+
+final_amount = calculate_final_amount(15, 120, 35, 100, 160, 21.5, 11.5)
+print("Final Amount Including Taxes: AED " + str(final_amount))
+
