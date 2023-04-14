@@ -1,296 +1,262 @@
 from enum import Enum
 
-class PersonGender(Enum):
+class DentistSpecialist(Enum):
+    General_Dentist = 1
+    Pedodontist = 2
+    Orthodontist = 3
+
+class StaffGender(Enum):
     Female = 1
     Male = 2
 
-class VehicleMake(Enum):
-    Nissan = 1
-    Mercedes = 2
-    Kia = 3
+class PatientGender(Enum):
+    Female = 1
+    Male = 2
 
-class VehicleModel(Enum):
-    Altima = 1
-    Sedan = 2
-    SUV = 3
+class DentalCompany:
+    """Class to represent Dental Company"""
+    def __init__(self, name):
+        self.name = name
+        self.branches = []
 
-class Person:
-    # Doc_String
-    """Class to represent a Customer"""
+    def add_branch(self, branch):
+        self.branches.append(branch)
 
-    # Constructor
-    def __init__(self, per_fname, per_lname, per_age, per_gender, per_phonenum):
-        self.per_fname = per_fname
-        self.per_lname = per_lname
-        self.per_age = per_age
-        self.per_gender = per_gender
-        self.per_phonenum = per_phonenum
+    def remove_branch(self, branch):
+        self.branches.remove(branch)
 
-    def set_per_fname(self, per_fname):
-        self.per_fname = per_fname
-    def get_per_fname(self):
-        return self.per_fname
+    def display_information(self):
+        print(f"Dental Company Name: {self.name}")
+        print("List of Branches: ")
+        for branch in self.branches:
+            print(f"- {branch.branch_address}")
 
-    def set_per_lname(self, per_lname):
-        self.per_lname = per_lname
-    def get_per_lname(self):
-        return self.per_lname
+class Branch:
+    """Class to represent Branch"""
+    def __init__(self, address, phonenum, reviews, manager):
+        self.branch_address = address
+        self.branch_phonenum = phonenum
+        self.branch_avg_reviews = reviews
+        self.branch_manager = manager
+        self.branch_staff = []
+        self.branch_patients = []
 
-    def set_per_age(self, per_age):
-        self.per_age = per_age
-    def get_per_age(self):
-        return self.per_age
+    def add_branch_staff(self, staff):
+        self.branch_staff.append(staff)
 
-    def set_per_gender(self, per_gender):
-        self.per_gender = per_gender
-    def get_per_gender(self):
-        return self.per_gender
+    def remove_branch_staff(self, staff):
+        self.branch_staff.remove(staff)
 
-    def set_per_phonenum(self, per_phonenum):
-        self.per_phonenum = per_phonenum
-    def get_per_phonenum(self):
-        return self.per_phonenum
+    def add_branch_patients(self, patients):
+        self.branch_patients.append(patients)
 
-    def displayInfo(self):
-        print(
-            "Name: " + self.per_fname+" "+self.per_lname+"\nAge: "+str(self.per_age)+"\nGender: "+str(self.per_gender)+"\nCell Phone Number: " +str(self.per_phonenum))
+    def remove_branch_patients(self, patients):
+        self.branch_patients.remove(patients)
 
-class Customer(Person):
-    # Doc_String
-    """Class to represent a Customer"""
+    def display_information(self):
+        print(f"Branch Address: {self.branch_address}")
+        print(f"Phone Number: {self.branch_phonenum}")
+        print(f"Average Reviews: {self.branch_avg_reviews}")
+        print(f"Manager: {self.branch_manager.staff_name}","\n" + "_" * 35)
+        print("List of Staff: ")
+        for staff in self.branch_staff:
+            print(f"- {staff.staff_name}","\n" + "_" * 35)
+        print("List of Patients: ")
+        for patient in self.branch_patients:
+            print(f"- {patient.patient_name}", "\n" + "_" * 35)
 
-    # Constructor
-    def __init__(self, per_fname, per_lname, per_age, per_gender, per_phonenum, cus_email, cus_home_address, cus_car_num, cus_car_license_num, cus_ID):
-        Person.__init__(self, per_fname, per_lname, per_age, per_gender, per_phonenum)
-        self.cus_email = cus_email
-        self.cus_home_address = cus_home_address
-        self.cus_car_num = cus_car_num
-        self.cus_car_license_num = cus_car_license_num
-        self.cus_ID = cus_ID
+class Staff:
+    """Class to represent Staff"""
+    def __init__(self, name, phonenum, email, staff_ID, age, gender):
+        self.staff_name = name
+        self.staff_phonenum = phonenum
+        self.staff_email = email
+        self.staff_ID = staff_ID
+        self.staff_age = age
+        self.staff_gender = gender
 
-    # Setter & Getter
-    def set_cus_email(self, cus_email):
-        self.cus_email = cus_email
-    def get_cus_email(self):
-        return self.cus_email
+    def display_information(self):
+        print("\n", f"Staff Name: {self.staff_name}")
+        print(f"Phone Number: {self.staff_phonenum}")
+        print(f"Email: {self.staff_email}")
+        print(f"Staff ID: {self.staff_ID}")
+        print(f"Age: {self.staff_age}")
+        print(f"Gender: {self.staff_gender}")
 
-    def set_cus_home_address(self, cus_home_address):
-        self.cus_home_address = cus_home_address
-    def get_cus_home_address(self):
-        return self.cus_home_address
+class Manager(Staff):
+    """Class to represent Manager"""
+    def __init__(self, name, phonenum, email, staff_ID, age, gender, position, manager_ID):
+        super().__init__(name, phonenum, email, staff_ID, age, gender)
+        self.manager_position = position
+        self.manager_ID = manager_ID
 
-    def set_cus_car_num(self, cus_car_num):
-        self.cus_car_num = cus_car_num
-    def get_cus_car_num(self):
-        return self.cus_car_num
+    def display_information(self):
+        super().display_information()
+        print(f"Position: {self.manager_position}")
+        print(f"Manager ID: {self.manager_ID}", "\n" + "_" * 35)
 
-    def set_cus_car_license_num(self, cus_car_license_num):
-        self.cus_car_license_num = cus_car_license_num
-    def get_cus_car_license_num(self):
-        return self.cus_car_license_num
+class Receptionist(Staff):
+    """Class to represent Receptionist"""
+    def __init__(self, name, phonenum, email, staff_ID, age, gender, shift, receptionist_ID):
+        super().__init__(name, phonenum, email, staff_ID, age, gender)
+        self.receptionist_shift = shift
+        self.receptionist_ID = receptionist_ID
 
-    def set_cus_ID(self, cus_ID):
-        self.cus_ID = cus_ID
-    def get_cus_ID(self):
-        return self.cus_ID
+    def display_information(self):
+        print("Receptionist Information:","\n" + "_" * 35)
+        print("Name:", self.staff_name)
+        print("Phone Number:", self.staff_phonenum)
+        print("Email:", self.staff_email)
+        print("Staff ID:", self.staff_ID)
+        print("Age:", self.staff_age)
+        print("Gender:", self.staff_gender)
+        print("Shift:", self.receptionist_shift)
+        print("Receptionist ID:", self.receptionist_ID,"\n" + "_" * 35)
 
-    # Display the information
-    def displayInfo(self):
-        Person.displayInfo(self)
-        print("Email: "+str(self.cus_email)+"\nHome Address: "+str(self.cus_home_address)+"\nCar Registration Number: "+str(self.cus_car_num)+"\nCar License Number: "+str(self.cus_car_license_num)+"\nID: "+str(self.cus_ID)+"\n\n"+"*"*33+"\n")
-# Creating objects
-customer = Customer("James W.", "Jones", 32, PersonGender.Male.name, "816-897-9862", "James.Jones@hotmail.com","USA-California", "AD-89034", 5000324, 78419914856293)
-customer.displayInfo()
+class Nurse(Staff):
+    """Class to represent Nurse"""
+    def __init__(self, name, phonenum, email, staff_ID, age, gender, shift, nurse_ID):
+        super().__init__(name, phonenum, email, staff_ID, age, gender)
+        self.nurse_shift = shift
+        self.nurse_ID = nurse_ID
 
-class Mechanic(Person):
-    # Doc_String
-    """Class to represent a Customer"""
+    def display_information(self):
+        print("Nurse Information:","\n" + "_" * 35)
+        print("Name:", self.staff_name)
+        print("Phone Number:", self.staff_phonenum)
+        print("Email:", self.staff_email)
+        print("Staff ID:", self.staff_ID)
+        print("Age:", self.staff_age)
+        print("Gender:", self.staff_gender)
+        print("Shift:", self.nurse_shift)
+        print("Nurse ID:", self.nurse_ID,"\n" + "_" * 35)
 
-    # Constructor
-    def __init__(self, per_fname, per_lname, per_age, per_gender, per_phonenum, mech_ID, mech_garage_address, mech_email, mech_job, mech_experience_level):
-        Person.__init__(self, per_fname, per_lname, per_age, per_gender, per_phonenum)
-        self.mech_ID = mech_ID
-        self.mech_garage_address = mech_garage_address
-        self.mech_email = mech_email
-        self.mech_job = mech_job
-        self.mech_experience_level = mech_experience_level
+class Dentist(Staff):
+    """Class to represent Dentist"""
+    def __init__(self, name, phonenum, email, staff_ID, age, gender, specialist, dentist_ID):
+        super().__init__(name, phonenum, email, staff_ID, age, gender)
+        self.dentist_specialist = specialist
+        self.dentist_ID = dentist_ID
 
-    # Setter & Getter
-    def set_mech_ID(self, mech_ID):
-        self.mech_ID = mech_ID
-    def get_mech_ID(self):
-        return self.mech_ID
+    def display_information(self):
+        print("Dentist Information:","\n" + "_" * 35)
+        print("Name:", self.staff_name)
+        print("Phone Number:", self.staff_phonenum)
+        print("Email:", self.staff_email)
+        print("Staff ID:", self.staff_ID)
+        print("Age:", self.staff_age)
+        print("Gender:", self.staff_gender)
+        print("Specialist:", self.dentist_specialist)
+        print("Dentist ID:", self.dentist_ID,"\n" + "_" * 35)
 
-    def set_mech_garage_address(self, mech_garage_address):
-        self.mech_garage_address = mech_garage_address
-    def get_mech_garage_address(self):
-        return self.mech_garage_address
+class Patient:
+    """Class to represent Patient"""
+    def __init__(self, name, phonenum, email, age, gender):
+        self.patient_name = name
+        self.patient_phonenum = phonenum
+        self.patient_email = email
+        self.patient_age = age
+        self.patient_gender = gender
+        self.appointments = []
+        self.total_cost = 0
 
-    def set_mech_email(self, mech_email):
-        self.mech_email = mech_email
-    def get_mech_email(self):
-        return self.mech_email
+    def add_patient_appointment(self, appointment):
+        self.appointments.append(appointment)
+        self.total_cost += appointment.get_total_cost()
 
-    def set_mech_job(self, mech_job):
-        self.mech_job = mech_job
-    def get_mech_job(self):
-        return self.mech_job
+    def remove_patient_appointment(self, appointment):
+        self.appointments.remove(appointment)
+        self.total_cost -= appointment.get_total_cost()
 
-    def set_mech_experience_level(self, mech_experience_level):
-        self.mech_experience_level = mech_experience_level
-    def get_mech_experience_level(self):
-        return self.mech_experience_level
+    def display_information(self):
+        print("Patient Information:","\n" + "_" * 35)
+        print("Name:", self.patient_name)
+        print("Phone Number:", self.patient_phonenum)
+        print("Email:", self.patient_email)
+        print("Age:", self.patient_age)
+        print("Gender:", self.patient_gender)
+        print("Appointments:")
+        for appointment in self.appointments:
+            appointment.display_information()
+        print("Total Cost:", self.total_cost, "\n" + "_" * 35)
 
-    # Display the information
-    def displayInfo(self):
-        Person.displayInfo(self)
-        print("Mechanic ID: "+str(self.mech_ID)+"\nGarage Address: "+str(self.mech_garage_address)+"\nEmail: "+str(self.mech_email)+"\nJob Type: "+str(self.mech_job)+"\nExperience Level: "+str(self.mech_experience_level)+"\n\n"+"*"*33+"\n")
+class Appointment:
+    """Class to represent Appointment"""
+    def __init__(self, appointment_date, appointment_time, service_type, cost):
+        self.appointment_date = appointment_date
+        self.appointment_time = appointment_time
+        self.appointment_service_type = service_type
+        self.appointment_cost = cost
 
-# Creating objects
-mechanic = Mechanic("Hans", "K (Mechanic)", 44, PersonGender.Male.name, "816-735-2847", "RE-27369", "USA-California", "Hans.K@hotmail.com", "General Automotive Mechanic", "Expert")
-mechanic.displayInfo()
+    def get_total_cost(self):
+        return self.appointment_cost * 1.05  # Add 5% VAT
 
-class Vehicle:
-    # Doc_String
-    """Class to represent a vehicle"""
+    def display_information(self):
+        print("Appointment Date:", self.appointment_date)
+        print("Appointment Time:", self.appointment_time)
+        print("Service Type:", self.appointment_service_type)
+        print("Cost:", self.appointment_cost)
+        print("Total Cost (incl. VAT):", self.get_total_cost(),"\n")
 
-    # Constructor
-    def __init__(self, vehmake, vehmodel, vehyear, vehprice, vehcolor, vehID):
-        self.vehmake = vehmake
-        self.vehmodel = vehmodel
-        self.vehyear = vehyear
-        self.vehprice = vehprice
-        self.vehcolor = vehcolor
-        self.vehID = vehID
+# Create a dental company
+dental_company = DentalCompany("Bright Smiles")
 
-    # Setter & Getter
-    def setvehmake(self, vehmake):
-        self.vehmake = vehmake
-    def getvehmake(self):
-        return self.vehmake
+# Create a branch and add it to the company
+branch1 = Branch("123 Main St", "025837698", 4.5, None)
+dental_company.add_branch(branch1)
+branch1 = Branch("537 Main St", "025854876", 3.9, None)
+dental_company.add_branch(branch1)
+dental_company.display_information()
 
-    def setvehmodel(self, vehmodel):
-        self.vehmodel = vehmodel
-    def getvehmodel(self):
-        return self.vehmodel
+# Create a manager for the branch
+manager1 = Manager("John Doe", "0522225115", "johndoe@brightsmiles.com", "1234", 40, StaffGender.Male, "Branch Manager", "5678")
+branch1.branch_manager = manager1
 
-    def setvehyear(self, vehyear):
-        self.vehyear = vehyear
-    def getvehyear(self):
-        return self.vehyear
+# Create a receptionist for the branch
+receptionist1 = Receptionist("Jane Smith", "0502845123", "janesmith@brightsmiles.com", "2345", 25, StaffGender.Female, "Morning Shift", "6789")
+branch1.add_branch_staff(receptionist1)
 
-    def setvehprice(self, vehprice):
-        self.vehprice = vehprice
-    def getvehprice(self):
-        return self.vehprice
+# Create a nurse for the branch
+nurse1 = Nurse("Bob Johnson", "0542225395", "bobjohnson@brightsmiles.com", "3456", 30, StaffGender.Male, "Evening Shift", "7890")
+branch1.add_branch_staff(nurse1)
 
-    def setvehcolor(self, vehcolor):
-        self.vehcolor = vehcolor
-    def getvehcolor(self):
-        return self.vehcolor
+# Create a dentist for the branch
+dentist1 = Dentist("Dr. Sarah Lee", "0502845388", "sarahlee@brightsmiles.com", "4567", 35, StaffGender.Female, DentistSpecialist.Orthodontist, "8901")
+branch1.add_branch_staff(dentist1)
 
-    def setvehID(self, vehID):
-        self.vehID = vehID
-    def getvehID(self):
-        return self.vehID
+# Display information for the manager, receptionist, nurse, dentist, and patient
+manager1.display_information()
+receptionist1.display_information()
+nurse1.display_information()
+dentist1.display_information()
 
-    # Display the information
-    def displayInfo(self):
-        print("Vehicle Type: "+str(self.vehmake)+" "+str(self.vehmodel)+"\nYear: "+str(self.vehyear)+"\nPrice: "+str(self.vehprice)+"\nVehicle Color: "+str(self.vehcolor)+"\nVehicle ID: "+str(self.vehID))
+# Create a patient
+patient1 = Patient("Shahad Ahmed", "0502845395", "shahadahmed@gmail.com", 20, PatientGender.Female)
 
-class Car(Vehicle):
-    # Doc_String
-    """Class to represent a Car"""
+# Create appointments for the patient
+appointment1 = Appointment("2023-04-20", "10:00am", "Cleaning", 100)
+appointment2 = Appointment("2023-04-25", "2:00pm", "Filling", 150)
+appointment3 = Appointment("2023-05-01", "9:00am", "Extraction", 200)
 
-    # Constructor
-    def __init__(self, vehmake, vehmodel, vehyear, vehprice, vehcolor, vehID, carnumwheels, carnumdoors, carloadcapacity, carloadweight, carroofwindow):
-        Vehicle.__init__(self, vehmake, vehmodel, vehyear, vehprice, vehcolor, vehID)
-        self.carnumwheels = carnumwheels
-        self.carnumdoors = carnumdoors
-        self.carloadcapacity = carloadcapacity
-        self.carloadweight = carloadweight
-        self.carroofwindow = carroofwindow
+# Add appointments to the patient and update their total cost
+patient1.add_patient_appointment(appointment1)
+patient1.add_patient_appointment(appointment2)
+patient1.add_patient_appointment(appointment3)
 
-    # Setter & Getter
-    def setcarnumwheels(self, carnumwheels):
-        self.carnumwheels = carnumwheels
-    def getcarnumwheels(self):
-        return self.carnumwheels
+# Display the patient's information including appointments and total cost
+patient1.display_information()
 
-    def setcarnumdoors(self, carnumdoors):
-        self.carnumdoors = carnumdoors
-    def getcarnumdoors(self):
-        return self.carnumdoors
+patient2 = Patient("Mariam Salem", "0560354421", "mariamsalem@gmail.com", 30, PatientGender.Female)
 
-    def setcarloadcapacity(self, carloadcapacity):
-        self.carloadcapacity = carloadcapacity
-    def getcarloadcapacity(self):
-        return self.carloadcapacity
+# Create appointments for the patient
+appointment1 = Appointment("2023-02-17", "1:00pm", "Cleaning", 130)
+appointment2 = Appointment("2023-04-28", "7:30pm", "Extraction", 250)
+appointment3 = Appointment("2023-12-01", "11:00am", "Filling", 150)
 
-    def setcarloadweight(self, carloadweight):
-        self.carloadweight = carloadweight
-    def getcarloadweight(self):
-        return self.carloadweight
+# Add appointments to the patient and update their total cost
+patient2.add_patient_appointment(appointment1)
+patient2.add_patient_appointment(appointment2)
+patient2.add_patient_appointment(appointment3)
 
-    def setcarroofwindow(self, carroofwindow):
-        self.carroofwindow = carroofwindow
-    def getcarroofwindow(self):
-        return self.carroofwindow
-
-    # Display the information
-    def displayInfo(self):
-        Vehicle.displayInfo(self)
-        print("Number of Wheels: "+str(self.carnumwheels)+"\nNumber of Doors: "+str(self.carnumdoors)+"\nLoad Capacity: "+str(self.carloadcapacity)+"\nLoad Weight: "+str(self.carloadweight)+"\nIs there a Roof Window: "+str(self.carroofwindow)+"\n\n"+"*"*33+"\n")
-
-
-# Creating objects
-car = Car(VehicleMake.Nissan.name, VehicleModel.Altima.name, 2014, 25000, "Silver", "AD-89034", 4, 4, 1400, 1000, True)
-car.displayInfo()
-
-
-class Receipt:
-    """Class to represent a Receipt"""
-
-    def __init__(self, diagnostics_price, oil_replacement_price, oil_filter_price, tire_replacement_price, tire_price,
-                 taxes, discount):
-        self.diagnostics_price = diagnostics_price
-        self.oil_replacement_price = oil_replacement_price
-        self.oil_filter_price = oil_filter_price
-        self.tire_replacement_price = tire_replacement_price
-        self.tire_price = tire_price
-        self.taxes = taxes
-        self.discount = discount
-
-    print("Receipt\n" + "\nServices                  | Price (AED)" + "\n" + "_" * 40)
-
-    def displayInfo(self):
-        print("\n1. Diagnostics            | " + str(self.diagnostics_price) + "\n2. Oil Replacement        | " + str(
-            self.oil_replacement_price) + "\n3. Oil Filter Parts       | " + str(
-            self.oil_filter_price) + "\n4. Tire Replacement (2)   | " + str(
-            self.tire_replacement_price) + "\n5. Tire (2)               | " + str(
-            self.tire_price) + "\n                    Taxes | " + str(
-            self.taxes) + "\n                 Discount | " + str(self.discount) + "\n" + "_" * 40 + "\n")
-
-
-receipt = Receipt(15, 120, 35, 100, 160, 21.5, 11.5)
-receipt.displayInfo()
-
-
-def calculate_final_amount(diagnostics_price, oil_replacement_price, oil_filter_price, tire_replacement_price,
-                           tire_price, taxes, discount):
-    # Calculate the subtotal by adding up all the prices
-    total = diagnostics_price + oil_replacement_price + oil_filter_price + tire_replacement_price + tire_price
-    print("Total: AED " + str(total))
-    # Apply the discount by subtracting it from the subtotal
-    total_after_discount = total - discount
-    print("Total After Discount: AED " + str(total_after_discount))
-    # Calculate the final amount by adding the taxes to the discounted total
-    final_amount = total_after_discount + taxes
-
-    # Return the final amount
-    return final_amount
-
-
-final_amount = calculate_final_amount(15, 120, 35, 100, 160, 21.5, 11.5)
-print("Final Amount Including Taxes: AED " + str(final_amount))
-
+# Display the patient's information including appointments and total cost
+patient2.display_information()
